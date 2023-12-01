@@ -1,7 +1,11 @@
 import { SafeAreaView, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { USERS } from "./src/data/users";
 
 const App = () => {
+  const myUser = USERS[0];
+  console.log("🚀 ~ file: App.tsx:7 ~ App ~ myUser:", myUser);
+
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topInfo}>
