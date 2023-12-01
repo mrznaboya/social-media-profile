@@ -5,8 +5,17 @@ const App = () => {
   return (
     <SafeAreaView style={styles.container}>
       <View style={styles.topInfo}>
-        <View style={styles.imageColumn} />
-        <View style={styles.userInfoColumn} />
+        <View style={styles.imageColumn}>
+          <View style={styles.photo} />
+        </View>
+        <View style={styles.userInfoColumn}>
+          <Text style={styles.name}> Zuriel Naboya</Text>
+          <Text style={styles.username}>@mrznaboya</Text>
+          <Text style={styles.bio}>
+            Lorem ipsum dolor sit, amet consectetur adipisicing elit. Aut,
+            earum!
+          </Text>
+        </View>
       </View>
     </SafeAreaView>
   );
@@ -20,16 +29,37 @@ const styles = StyleSheet.create({
   },
   topInfo: {
     height: 150,
-    backgroundColor: "red",
+    flexDirection: "row",
   },
   imageColumn: {
     height: "100%",
     width: "35%",
-    backgroundColor: "orange",
+    justifyContent: "center",
+    alignItems: "center",
   },
   userInfoColumn: {
     height: "100%",
     width: "65%",
-    backgroundColor: "yellow",
+    justifyContent: "center",
+  },
+  photo: {
+    height: 100,
+    width: 100,
+    backgroundColor: "blue",
+    borderRadius: 50,
+  },
+  name: {
+    fontSize: 20,
+    fontWeight: "500",
+  },
+  username: {
+    fontSize: 20,
+    fontWeight: "400",
+    fontStyle: "italic",
+  },
+  bio: {
+    fontSize: 13,
+    fontWeight: "300",
+    marginTop: 5,
   },
 });
