@@ -2,6 +2,7 @@ import { User } from "../model/user";
 
 export const USERS: User[] = [
   {
+    id: "User1",
     firstName: "Zuriel",
     lastName: "Naboya",
     userName: "mrznaboya",

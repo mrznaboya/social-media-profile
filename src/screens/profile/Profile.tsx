@@ -1,15 +1,19 @@
 import { StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
 import { USERS } from "../../data/users";
+import { POSTS } from "../../data/posts";
+import PostCard from "../../components/PostCard";
 
 const Profile = () => {
   const myUser = USERS[0];
-  console.log("🚀 ~ file: App.tsx:7 ~ App ~ myUser:", myUser);
+  //   console.log("🚀 ~ file: App.tsx:7 ~ App ~ myUser:", myUser);
+  const postForUser = POSTS;
 
   return (
     <View style={styles.container}>
+      {/* For Android */}
       <StatusBar backgroundColor={"transparent"} barStyle="dark-content" />
-
+      {/* User Info Header */}
       <View style={styles.topInfo}>
         {/* Photo Column */}
         <View style={styles.imageColumn}>
@@ -24,6 +28,13 @@ const Profile = () => {
           <Text style={styles.username}>@{myUser.userName}</Text>
           <Text style={styles.bio}>{myUser.bio}</Text>
         </View>
+      </View>
+
+      {/* Previous Posts */}
+      <View style={styles.posts}>
+        {postForUser.map((post) => (
+          <PostCard post={post} key={post.id} />
+        ))}
       </View>
     </View>
   );
@@ -69,5 +80,10 @@ const styles = StyleSheet.create({
     fontSize: 13,
     fontWeight: "300",
     marginTop: 5,
+  },
+  posts: {
+    height: "100%",
+    // backgroundColor: "pink",
+    alignItems: "center",
   },
 });
