@@ -1,10 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
 import currentPost from "./features/currentPost";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+import currentUser from "./features/currentUser";
 
 const store = configureStore({
   reducer: {
     currentPost,
+    currentUser,
   },
 });
 
