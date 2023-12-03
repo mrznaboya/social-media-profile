@@ -2,8 +2,8 @@ import React from "react";
 import { Redirect } from "expo-router";
 import { ROUTES } from "../src/routes";
 
-const Page = () => {
+const Root = () => {
   return <Redirect href={ROUTES.HOME} />;
 };
 
-export default Page;
+export default Root;
