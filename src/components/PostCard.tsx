@@ -1,7 +1,18 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+  SafeAreaView,
+  StatusBar,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import React from "react";
 import { Post } from "../model/post";
 import { USERS } from "../data/users";
+import { router } from "expo-router";
+import { ROUTES } from "../routes";
+import { useAppDispatch } from "../store";
+import { CurrentPostActions } from "../store/features/currentPost";
 
 type Props = {
   post: Post;
@@ -9,12 +20,19 @@ type Props = {
 
 const PostCard = (props: Props) => {
   const post = props.post;
+  const dispatch = useAppDispatch();
 
   const userInfo = USERS.find((user) => user.id === post.user);
-  //   console.log("🚀 ~ file: PostCard.tsx:14 ~ PostCard ~ userInfo:", userInfo);
+  // console.log("🚀 ~ file: PostCard.tsx:14 ~ PostCard ~ userInfo:", userInfo);
+
+  const goToPostDetailPage = () => {
+    dispatch(CurrentPostActions.setCurrentPost(post));
+
+    router.push(ROUTES.POST);
+  };
 
   return (
-    <View style={styles.container}>
+    <TouchableOpacity style={styles.container} onPress={goToPostDetailPage}>
       <View style={styles.photoContainer}>
         <View style={styles.photo} />
       </View>
@@ -25,7 +43,7 @@ const PostCard = (props: Props) => {
         </Text>
         <Text>{post.text}</Text>
       </View>
-    </View>
+    </TouchableOpacity>
   );
 };
 
