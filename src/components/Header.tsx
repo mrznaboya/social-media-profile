@@ -1,8 +1,9 @@
 import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
 import React from "react";
+import { Ionicons } from "@expo/vector-icons";
 
 type HeaderButton = {
-  child: JSX.Element;
+  child?: JSX.Element;
   onPress: () => void;
 };
 
@@ -29,7 +30,11 @@ const Header = (props: Props) => {
         style={styles.leftButtonContainer}
         onPress={leftButtonPress}
       >
-        {leftButton?.child || null}
+        {leftButton?.child ||
+          (leftButton?.onPress && (
+            <Ionicons name="chevron-back" size={24} color="black" />
+          )) ||
+          null}
       </TouchableOpacity>
 
       <View>{showLogo ? <View style={styles.logo} /> : null}</View>

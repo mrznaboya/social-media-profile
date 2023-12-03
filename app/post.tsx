@@ -12,7 +12,6 @@ import { USERS } from "../src/data/users";
 import { CurrentUserActions } from "../src/store/features/currentUser";
 import { ROUTES } from "../src/routes";
 import Header from "../src/components/Header";
-import { Ionicons } from "@expo/vector-icons";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 const PostDetailPage = () => {
@@ -27,6 +26,7 @@ const PostDetailPage = () => {
 
   const goToUserDetailPage = () => {
     dispatch(CurrentUserActions.setCurrentUser(userInfo));
+
     router.push(ROUTES.USER);
   };
 
@@ -34,7 +34,6 @@ const PostDetailPage = () => {
     <SafeAreaView style={styles.container} edges={["top"]}>
       <Header
         leftButton={{
-          child: <Ionicons name="chevron-back" size={24} color="black" />,
           onPress: goBack,
         }}
         // rightButton={{
@@ -46,7 +45,9 @@ const PostDetailPage = () => {
 
       <View style={styles.main}>
         <TouchableOpacity onPress={goToUserDetailPage}>
-          <Text>User A</Text>
+          <Text>
+            {userInfo?.firstName} {userInfo?.lastName} @{userInfo?.userName}
+          </Text>
         </TouchableOpacity>
 
         <Text>{currentPost.text}</Text>
@@ -66,5 +67,6 @@ const styles = StyleSheet.create({
   main: {
     flex: 1,
     backgroundColor: "white",
+    padding: 10,
   },
 });
