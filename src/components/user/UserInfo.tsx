@@ -1,6 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { User } from "../model/user";
+import { StyleSheet, Text, View } from "react-native";
+
+import { User } from "../../model/user";
 
 type Props = {
   user: User;
@@ -38,9 +39,10 @@ const styles = StyleSheet.create({
   },
   imageColumn: {
     height: "100%",
-    width: "35%",
+    width: "30%",
     justifyContent: "center",
     alignItems: "center",
+    // backgroundColor: "orange",
   },
   userInfoColumn: {
     height: "100%",

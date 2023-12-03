@@ -1,8 +1,9 @@
-import { StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
-import { POSTS } from "../../data/posts";
+import { StatusBar, StyleSheet, View } from "react-native";
+
 import PostCard from "../../components/PostCard";
-import UserInfo from "../../components/UserInfo";
+import UserInfo from "../../components/user/UserInfo";
+import { POSTS } from "../../data/posts";
 import { USERS } from "../../data/users";
 
 const Profile = () => {
@@ -12,7 +13,7 @@ const Profile = () => {
   return (
     <View style={styles.container}>
       {/* For Android */}
-      <StatusBar backgroundColor={"transparent"} barStyle="dark-content" />
+      <StatusBar backgroundColor="transparent" barStyle="dark-content" />
       {/* User Info Header */}
       <UserInfo user={myUser} />
 

@@ -1,5 +1,6 @@
-import { SafeAreaView, StatusBar, StyleSheet, Text, View } from "react-native";
 import React from "react";
+import { SafeAreaView, StyleSheet } from "react-native";
+
 import Profile from "./src/screens/profile/Profile";
 
 const App = () => {

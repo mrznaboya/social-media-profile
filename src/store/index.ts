@@ -1,7 +1,9 @@
 import { configureStore } from "@reduxjs/toolkit";
-import currentPost from "./features/currentPost";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
+
+import currentPost from "./features/currentPost";
 import currentUser from "./features/currentUser";
+import posts from "./features/posts";
 import user from "./features/user";
 
 const store = configureStore({
@@ -18,6 +20,10 @@ const store = configureStore({
      * The currently logged in user is stored in the user slice of state.
      */
     user,
+    /**
+     * As the user comes across posts in the app, they are stored in the posts dump of state.
+     */
+    posts,
   },
 });
 

@@ -1,8 +1,9 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-import { Post } from "../model/post";
-import { USERS } from "../data/users";
 import { router } from "expo-router";
+import React from "react";
+import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
+
+import { USERS } from "../data/users";
+import { Post } from "../model/post";
 import { ROUTES } from "../routes";
 import { useAppDispatch } from "../store";
 import { CurrentPostActions } from "../store/features/currentPost";
