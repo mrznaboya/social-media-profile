@@ -3,14 +3,17 @@ import { Platform, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppInput from "../src/components/AppInput";
+import ButtonText from "../src/components/ButtonText";
+import ContinueButton from "../src/components/ContinueButton";
 import Header from "../src/components/Header";
 import InputLabel from "../src/components/InputLabel";
 import Spacing from "../src/components/Spacing";
-import ContinueButton from "../src/components/ContinueButton";
-import ButtonText from "../src/components/ButtonText";
+import { useAppDispatch, useAppSelector } from "../src/store";
+import { UserActions } from "../src/store/features/user";
 
 const Signup = () => {
-  const [email, setEmail] = useState("");
+  const dispatch = useAppDispatch();
+  const user = useAppSelector((state) => state.user);
   const [password, setPassword] = useState("");
 
   const createAccount = () => {
@@ -26,16 +29,41 @@ const Signup = () => {
       </View>
 
       <View style={styles.elementContainer}>
-        <InputLabel text="Email" />
+        <InputLabel text="Name" />
         <AppInput
-          value={email}
-          onChangeText={setEmail}
+          value={user.name}
+          onChangeText={(text) => dispatch(UserActions.setName(text))}
           autoCapitalize="none"
           autoCorrect={false}
         />
       </View>
 
       <Spacing vertical={10} />
+
+      <View style={styles.elementContainer}>
+        <InputLabel text="Username" />
+        <AppInput
+          value={user.username}
+          onChangeText={(text) => dispatch(UserActions.setUsername(text))}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </View>
+
+      <Spacing vertical={10} />
+
+      <View style={styles.elementContainer}>
+        <InputLabel text="Email" />
+        <AppInput
+          value={user.email}
+          onChangeText={(text) => dispatch(UserActions.setEmail(text))}
+          autoCapitalize="none"
+          autoCorrect={false}
+        />
+      </View>
+
+      <Spacing vertical={10} />
+
       <View style={styles.elementContainer}>
         <InputLabel text="Password" />
         <AppInput

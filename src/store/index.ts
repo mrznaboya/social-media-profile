@@ -1,4 +1,4 @@
-import { configureStore } from "@reduxjs/toolkit";
+import { Action, ThunkAction, configureStore } from "@reduxjs/toolkit";
 import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import currentPost from "./features/currentPost";
@@ -43,3 +43,4 @@ export const useAppDispatch = () => useDispatch<AppDispatch>();
  * Used throughout the app to read from redux
  */
 export const useAppSelector: TypedUseSelectorHook<RootState> = useSelector;
+export type AppThunk<R> = ThunkAction<R, RootState, unknown, Action<any>>;
