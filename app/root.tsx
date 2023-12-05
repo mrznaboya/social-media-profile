@@ -1,6 +1,7 @@
 import { router } from "expo-router";
 import React, { useEffect } from "react";
-import { StyleSheet, Text, View } from "react-native";
+import { Text, View } from "react-native";
+
 import { ROUTES } from "../src/routes";
 
 const Root = () => {
@@ -17,5 +18,3 @@ const Root = () => {
 };
 
 export default Root;
-
-const styles = StyleSheet.create({});

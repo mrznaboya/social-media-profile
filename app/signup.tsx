@@ -10,6 +10,7 @@ import InputLabel from "../src/components/InputLabel";
 import Spacing from "../src/components/Spacing";
 import { useAppDispatch, useAppSelector } from "../src/store";
 import { UserActions } from "../src/store/features/user";
+import { createUserAccountThunk } from "../src/store/thunks/user-thunk";
 
 const Signup = () => {
   const dispatch = useAppDispatch();
@@ -18,6 +19,10 @@ const Signup = () => {
 
   const createAccount = () => {
     console.log("createAccount");
+    const onSuccess = () => {};
+    const onError = () => {};
+
+    dispatch(createUserAccountThunk({ password, onSuccess, onError }));
   };
 
   return (
