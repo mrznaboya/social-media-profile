@@ -7,8 +7,9 @@ export const createProfileWithId = async (
 ) => {
   try {
     const { error } = await supabase
-      .from("profiles")
-      .upsert({ ...data, id: profileId });
+      .from(path)
+      .upsert({ ...data, id: profileId })
+      .select();
 
     if (error) {
       return { error };
