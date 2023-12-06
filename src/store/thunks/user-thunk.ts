@@ -1,5 +1,6 @@
 import { AppThunk } from "..";
 import { supabase } from "../../api/utils/supabase";
+import { createUserProfile } from "../../services/user";
 
 type CreateUserAccountThunkProps = {
   password: string;
@@ -14,15 +15,8 @@ export const createUserAccountThunk = (
 
   return async (dispatch, state) => {
     try {
-      // const newUser = Object.assign({}, state().user);
-      // newUser.createdDate = Date.now();
-
-      //   auth().createUserWithEmailandPassword(newUser.email, password);
-      // } catch (error) {
-      //   console.log(error);
-      // }
-      // };
-      const newUser = { ...state().user, createdDate: Date.now() };
+      const newUser = Object.assign({}, state().user);
+      newUser.createdDate = Date.now();
 
       const { error } = await supabase.auth.signUp({
         email: newUser.email,
@@ -34,7 +28,9 @@ export const createUserAccountThunk = (
         return onError();
       }
 
-      return onSuccess();
+      await createUserProfile(newUser);
+
+      onSuccess();
     } catch (error) {
       console.log(error);
       return onError();
