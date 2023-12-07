@@ -92,5 +92,5 @@ export const supabase = createClient(
 );
 
 export enum SUPABASE_TABLES {
-  USER = "profile",
+  PROFILE = "profile",
 }

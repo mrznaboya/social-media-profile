@@ -36,7 +36,7 @@ const Signup = () => {
       <View style={styles.elementContainer}>
         <InputLabel text="Name" />
         <AppInput
-          value={user.full_name}
+          value={user.name}
           onChangeText={(text) => dispatch(UserActions.setName(text))}
           autoCapitalize="none"
           autoCorrect={false}

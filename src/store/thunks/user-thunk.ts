@@ -16,7 +16,7 @@ export const createUserAccountThunk = (
   return async (dispatch, state) => {
     try {
       const newUser = Object.assign({}, state().user);
-      newUser.createdDate = Date.now();
+      newUser.created_at = Date.now();
 
       const { error } = await supabase.auth.signUp({
         email: newUser.email,
