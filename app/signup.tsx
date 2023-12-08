@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import auth from "@react-native-firebase/auth";
+import React, { useEffect, useState } from "react";
 import { Platform, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -16,6 +17,10 @@ const Signup = () => {
   const dispatch = useAppDispatch();
   const user = useAppSelector((state) => state.user);
   const [password, setPassword] = useState("");
+
+  // useEffect(() => {
+  //   console.log(auth().currentUser?.email);
+  // }, []);
 
   const createAccount = () => {
     console.log("createAccount");

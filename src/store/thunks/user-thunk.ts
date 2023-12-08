@@ -1,6 +1,8 @@
+import auth from "@react-native-firebase/auth";
+
 import { AppThunk } from "..";
-import { supabase } from "../../api/utils/supabase";
-import { createUserProfile } from "../../services/user";
+import { createUserDocument } from "../../services/user";
+import { FIREBASE_COLLECTIONS, generateFirebaseId } from "../../api/utils";
 
 type CreateUserAccountThunkProps = {
   password: string;
@@ -16,19 +18,12 @@ export const createUserAccountThunk = (
   return async (dispatch, state) => {
     try {
       const newUser = Object.assign({}, state().user);
-      newUser.created_at = Date.now();
+      newUser.id = generateFirebaseId(FIREBASE_COLLECTIONS.USER);
+      newUser.createdDate = Date.now();
 
-      const { error } = await supabase.auth.signUp({
-        email: newUser.email,
-        password,
-      });
+      await auth().createUserWithEmailAndPassword(newUser.email, password);
 
-      if (error) {
-        console.error(error);
-        return onError();
-      }
-
-      await createUserProfile(newUser);
+      await createUserDocument(newUser);
 
       onSuccess();
     } catch (error) {

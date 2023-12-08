@@ -1,10 +1,10 @@
-import { createProfileWithId } from "../api/utils/DocumentMutator";
-import { SUPABASE_TABLES } from "../api/utils/supabase";
+import { createProfileWithId } from "../api/DocumentMutator";
+import { FIREBASE_COLLECTIONS } from "../api/utils";
 import { User } from "../model/user";
 
-export const createUserProfile = async (user: User) => {
+export const createUserDocument = async (user: User) => {
   const resp = await createProfileWithId(
-    SUPABASE_TABLES.PROFILE,
+    FIREBASE_COLLECTIONS.USER,
     user.id,
     user
   );

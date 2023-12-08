@@ -8,6 +8,6 @@ export type User = {
   /**
    * Metadata
    */
-  created_at: number;
-  created_at_string: string;
+  createdDate: number;
+  createdDateString: string;
 };
