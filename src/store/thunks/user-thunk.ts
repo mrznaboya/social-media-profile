@@ -1,8 +1,8 @@
 import auth from "@react-native-firebase/auth";
 
 import { AppThunk } from "..";
-import { createUserDocument } from "../../services/user";
 import { FIREBASE_COLLECTIONS, generateFirebaseId } from "../../api/utils";
+import { createUserDocument } from "../../services/user";
 
 type CreateUserAccountThunkProps = {
   password: string;
