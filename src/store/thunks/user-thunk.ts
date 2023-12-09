@@ -7,6 +7,7 @@ import {
   getUserDocumentWithEmail,
 } from "../../services/user";
 import { UserActions } from "../features/user";
+import { UsersActions } from "../features/users";
 
 type CreateUserAccountThunkProps = {
   password: string;
@@ -36,6 +37,7 @@ export const createUserAccountThunk = (
     }
   };
 };
+
 type LoginUserThunkProps = {
   email: string;
   onSuccess: () => void;
@@ -50,6 +52,7 @@ export const LoginUserThunk = (props: LoginUserThunkProps): AppThunk<void> => {
       const user = await getUserDocumentWithEmail(email);
 
       dispatch(UserActions.setUser(user));
+      dispatch(UsersActions.addUsers([user]));
 
       onSuccess();
     } catch (error) {

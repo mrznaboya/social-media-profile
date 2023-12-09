@@ -33,7 +33,7 @@ const PostCard = (props: Props) => {
 
       <View style={styles.content}>
         <Text>
-          {userInfo?.firstName} {userInfo?.lastName} @{userInfo?.userName}
+          {userInfo?.name} @{userInfo?.username}
         </Text>
         <Text>{post.text}</Text>
       </View>

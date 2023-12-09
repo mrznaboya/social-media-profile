@@ -1,6 +1,6 @@
 import firestore from "@react-native-firebase/firestore";
 
-export const createProfileWithId = async (
+export const createDocumentWithId = async (
   path: string,
   documentId: string,
   data: object

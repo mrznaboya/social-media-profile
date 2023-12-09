@@ -19,10 +19,8 @@ const UserInfo = (props: Props) => {
 
       {/* User Info Column */}
       <View style={styles.userInfoColumn}>
-        <Text style={styles.name}>
-          {user.firstName} {user.lastName}
-        </Text>
-        <Text style={styles.username}>@{user.userName}</Text>
+        <Text style={styles.name}>{user.name}</Text>
+        <Text style={styles.username}>@{user.username}</Text>
         <Text style={styles.bio}>{user.bio}</Text>
       </View>
     </View>

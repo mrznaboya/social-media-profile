@@ -10,7 +10,7 @@ const Root = () => {
   const dispatch = useAppDispatch();
 
   useEffect(() => {
-    dispatch(PostsActions.addPosts(POSTS));
+    // dispatch(PostsActions.addPosts(POSTS));
   }, []);
 
   return <Redirect href={ROUTES.ROOT} />;

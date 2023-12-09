@@ -1,4 +1,4 @@
-import { createProfileWithId } from "../api/DocumentMutator";
+import { createDocumentWithId } from "../api/DocumentMutator";
 import {
   WhereCriteria,
   getDocumentsWithCriteria,
@@ -7,7 +7,7 @@ import { FIREBASE_COLLECTIONS } from "../api/utils";
 import { User } from "../model/user";
 
 export const createUserDocument = async (user: User) => {
-  const resp = await createProfileWithId(
+  const resp = await createDocumentWithId(
     FIREBASE_COLLECTIONS.USER,
     user.id,
     user

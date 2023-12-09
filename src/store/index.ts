@@ -5,6 +5,7 @@ import currentPost from "./features/currentPost";
 import currentUser from "./features/currentUser";
 import posts from "./features/posts";
 import user from "./features/user";
+import users from "./features/users";
 
 const store = configureStore({
   reducer: {
@@ -24,6 +25,10 @@ const store = configureStore({
      * As the user comes across posts in the app, they are stored in the posts dump of state.
      */
     posts,
+    /**
+     * As the currently logged in User comes across other Users, we will store their documents inside of this 'users' slice of state
+     */
+    users,
   },
 });
 
