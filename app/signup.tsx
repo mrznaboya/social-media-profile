@@ -1,6 +1,6 @@
-import auth from "@react-native-firebase/auth";
-import React, { useEffect, useState } from "react";
-import { Platform, StyleSheet, Text, View } from "react-native";
+import { router } from "expo-router";
+import React, { useState } from "react";
+import { Alert, Platform, StyleSheet, Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import AppInput from "../src/components/AppInput";
@@ -9,6 +9,7 @@ import ContinueButton from "../src/components/ContinueButton";
 import Header from "../src/components/Header";
 import InputLabel from "../src/components/InputLabel";
 import Spacing from "../src/components/Spacing";
+import { ROUTES } from "../src/routes";
 import { useAppDispatch, useAppSelector } from "../src/store";
 import { UserActions } from "../src/store/features/user";
 import { createUserAccountThunk } from "../src/store/thunks/user-thunk";
@@ -18,14 +19,11 @@ const Signup = () => {
   const user = useAppSelector((state) => state.user);
   const [password, setPassword] = useState("");
 
-  // useEffect(() => {
-  //   console.log(auth().currentUser?.email);
-  // }, []);
-
   const createAccount = () => {
-    console.log("createAccount");
-    const onSuccess = () => {};
-    const onError = () => {};
+    // console.log("createAccount");
+    const onSuccess = () => router.push(ROUTES.HOME);
+    const onError = () =>
+      Alert.alert("Could not create account", "Please try again");
 
     dispatch(createUserAccountThunk({ password, onSuccess, onError }));
   };

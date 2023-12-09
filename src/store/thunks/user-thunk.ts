@@ -2,7 +2,11 @@ import auth from "@react-native-firebase/auth";
 
 import { AppThunk } from "..";
 import { FIREBASE_COLLECTIONS, generateFirebaseId } from "../../api/utils";
-import { createUserDocument } from "../../services/user";
+import {
+  createUserDocument,
+  getUserDocumentWithEmail,
+} from "../../services/user";
+import { UserActions } from "../features/user";
 
 type CreateUserAccountThunkProps = {
   password: string;
@@ -24,6 +28,28 @@ export const createUserAccountThunk = (
       await auth().createUserWithEmailAndPassword(newUser.email, password);
 
       await createUserDocument(newUser);
+
+      onSuccess();
+    } catch (error) {
+      console.log(error);
+      return onError();
+    }
+  };
+};
+type LoginUserThunkProps = {
+  email: string;
+  onSuccess: () => void;
+  onError: () => void;
+};
+
+export const LoginUserThunk = (props: LoginUserThunkProps): AppThunk<void> => {
+  const { email, onSuccess, onError } = props;
+
+  return async (dispatch) => {
+    try {
+      const user = await getUserDocumentWithEmail(email);
+
+      dispatch(UserActions.setUser(user));
 
       onSuccess();
     } catch (error) {

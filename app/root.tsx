@@ -1,14 +1,27 @@
+import auth from "@react-native-firebase/auth";
 import { router } from "expo-router";
 import React, { useEffect } from "react";
 import { Text, View } from "react-native";
 
 import { ROUTES } from "../src/routes";
+import { useAppDispatch } from "../src/store";
+import { LoginUserThunk } from "../src/store/thunks/user-thunk";
 
 const Root = () => {
+  const dispatch = useAppDispatch();
+  const goToSignUp = () => router.push(ROUTES.SIGN_UP);
+  const goToApp = () => router.push(ROUTES.HOME);
+
   useEffect(() => {
-    setTimeout(() => {
-      router.push(ROUTES.SIGN_UP);
-    }, 1000);
+    if (auth().currentUser?.email) {
+      dispatch(
+        LoginUserThunk({
+          email: auth().currentUser?.email || "",
+          onSuccess: goToApp,
+          onError: goToSignUp,
+        })
+      );
+    }
   }, []);
   return (
     <View>
