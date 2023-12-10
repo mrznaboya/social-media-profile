@@ -1,14 +1,15 @@
 import auth from "@react-native-firebase/auth";
 
+import { getAllPostsThunk } from "./posts-thunk";
 import { AppThunk } from "..";
 import { FIREBASE_COLLECTIONS, generateFirebaseId } from "../../api/utils";
 import {
   createUserDocument,
+  getAllUsers,
   getUserDocumentWithEmail,
 } from "../../services/user";
 import { UserActions } from "../features/user";
 import { UsersActions } from "../features/users";
-import { getPostsForUserThunk } from "./posts-thunk";
 
 type CreateUserAccountThunkProps = {
   password: string;
@@ -47,7 +48,6 @@ type LoginUserThunkProps = {
 
 export const LoginUserThunk = (props: LoginUserThunkProps): AppThunk<void> => {
   const { email, onSuccess, onError } = props;
-
   return async (dispatch) => {
     try {
       const user = await getUserDocumentWithEmail(email);
@@ -55,12 +55,24 @@ export const LoginUserThunk = (props: LoginUserThunkProps): AppThunk<void> => {
       dispatch(UserActions.setUser(user));
       dispatch(UsersActions.addUsers([user]));
 
-      dispatch(getPostsForUserThunk(user.id));
+      dispatch(getAllPostsThunk());
+      dispatch(getAllUsersThunk());
 
       onSuccess();
     } catch (error) {
       console.log(error);
       return onError();
+    }
+  };
+};
+
+export const getAllUsersThunk = (): AppThunk<void> => {
+  return async (dispatch) => {
+    try {
+      const users = await getAllUsers();
+      dispatch(UsersActions.addUsers(users));
+    } catch (error) {
+      console.log("Could not retrieve all users", error);
     }
   };
 };

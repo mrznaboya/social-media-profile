@@ -15,7 +15,7 @@ export enum FIREBASE_COLLECTIONS {
   POST = "post",
 }
 
-export const getDocumentFromQuerySnapshot = (
+export const getDocumentsFromQuerySnapshot = (
   querySnapshot: FirebaseFirestoreTypes.QuerySnapshot
 ) => {
   const documents: any = [];

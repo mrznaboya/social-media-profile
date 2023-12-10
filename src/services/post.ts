@@ -1,6 +1,7 @@
 import { createDocumentWithId } from "../api/DocumentMutator";
 import {
   WhereCriteria,
+  getAllDocumentsWithPath,
   getDocumentsWithCriteria,
 } from "../api/DocumentRetriever";
 import { FIREBASE_COLLECTIONS } from "../api/utils";
@@ -28,10 +29,21 @@ export const getPostsForUser = async (user: string) => {
     operation: "==",
     criteria: user,
   };
+
   const resp = await getDocumentsWithCriteria(
     FIREBASE_COLLECTIONS.POST,
     criteria
   );
+
+  if (resp.error) {
+    throw resp.error;
+  }
+
+  return resp.data as Post[];
+};
+
+export const getAllPosts = async () => {
+  const resp = await getAllDocumentsWithPath(FIREBASE_COLLECTIONS.POST);
 
   if (resp.error) {
     throw resp.error;

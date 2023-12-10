@@ -1,9 +1,12 @@
+import auth from "@react-native-firebase/auth";
+import { router } from "expo-router";
 import React, { useMemo } from "react";
 import {
   ScrollView,
   StyleSheet,
   Platform,
   TouchableOpacity,
+  Text,
 } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
@@ -11,6 +14,7 @@ import ButtonText from "../src/components/ButtonText";
 import Header from "../src/components/Header";
 import PostCard from "../src/components/PostCard";
 import Spacing from "../src/components/Spacing";
+import { ROUTES } from "../src/routes";
 import { useAppDispatch, useAppSelector } from "../src/store";
 import { CurrentPostActions } from "../src/store/features/currentPost";
 import { PostBuilderActions } from "../src/store/features/postBuilder";
@@ -31,9 +35,21 @@ const Home = () => {
     dispatch(PostBuilderActions.setIsPostModalOpen(true));
   };
 
+  const signOut = () => {
+    auth().signOut();
+
+    router.replace(ROUTES.ROOT);
+  };
+
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
-      <Header showLogo />
+      <Header
+        showLogo
+        rightButton={{
+          child: <Text>Sign Out</Text>,
+          onPress: signOut,
+        }}
+      />
       <ScrollView
         contentContainerStyle={styles.scrollView}
         showsVerticalScrollIndicator={false}

@@ -41,10 +41,6 @@ const PostDetailPage = () => {
         leftButton={{
           onPress: goBack,
         }}
-        // rightButton={{
-        //   child: <Ionicons name="chevron-forward" size={24} color="black" />,
-        //   onPress: goBack,
-        // }}
         showLogo
       />
 

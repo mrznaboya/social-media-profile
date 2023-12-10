@@ -1,9 +1,20 @@
 import { AppThunk } from "..";
-import { getPostsForUser } from "../../services/post";
+import { getAllPosts, getPostsForUser } from "../../services/post";
 import { PostsActions } from "../features/posts";
 
+export const getAllPostsThunk = (): AppThunk<void> => {
+  return async (dispatch) => {
+    try {
+      const posts = await getAllPosts();
+      dispatch(PostsActions.addPosts(posts));
+    } catch (error) {
+      console.log("Could not retrieve all posts", error);
+    }
+  };
+};
+
 export const getPostsForUserThunk = (id: string): AppThunk<void> => {
-  return async (dispatch, state) => {
+  return async (dispatch) => {
     try {
       const postsForUser = await getPostsForUser(id);
       dispatch(PostsActions.addPosts(postsForUser));

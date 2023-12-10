@@ -2,7 +2,7 @@ import firestore, {
   FirebaseFirestoreTypes,
 } from "@react-native-firebase/firestore";
 
-import { getDocumentFromQuerySnapshot } from "./utils";
+import { getDocumentsFromQuerySnapshot } from "./utils";
 
 export const getDocumentWithPathAndId = async (
   path: string,
@@ -69,10 +69,30 @@ const handleWhereQuery = async (
   path: string,
   snapshot: FirebaseFirestoreTypes.QuerySnapshot
 ) => {
-  const documents = getDocumentFromQuerySnapshot(snapshot);
+  const documents = getDocumentsFromQuerySnapshot(snapshot);
   if (documents.length > 0) {
     return { data: documents, error: null };
   } else {
     return { data: null, error: `No documents were found at path(${path})` };
   }
+};
+
+export const getAllDocumentsWithPath = async (path: string) => {
+  let documents;
+  return await firestore()
+    .collection(path)
+    .get()
+    .then((snapshot) => {
+      documents = getDocumentsFromQuerySnapshot(snapshot);
+      return {
+        data: documents,
+        error: null,
+      };
+    })
+    .catch((error) => {
+      return {
+        data: null,
+        error,
+      };
+    });
 };
