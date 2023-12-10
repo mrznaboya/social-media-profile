@@ -23,6 +23,11 @@ export const createFriendshipDocument = async (friendship: Friendship) => {
  * @returns List of `Post`
  */
 export const getFriendshipsForUser = async (user: string) => {
+  console.log(
+    "🚀 ~ file: friendship.ts:26 ~ getFriendshipsForUser ~ user:",
+    user
+  );
+
   const criteria: WhereCriteria = {
     field: "users",
     operation: "array-contains",
@@ -30,7 +35,7 @@ export const getFriendshipsForUser = async (user: string) => {
   };
 
   const resp = await getDocumentsWithCriteria(
-    FIREBASE_COLLECTIONS.USER,
+    FIREBASE_COLLECTIONS.FRIENDSHIP,
     criteria
   );
 

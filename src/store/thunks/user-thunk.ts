@@ -1,5 +1,6 @@
 import auth from "@react-native-firebase/auth";
 
+import { getFriendshipsForUserThunk } from "./friendships-thunk";
 import { getAllPostsThunk } from "./posts-thunk";
 import { AppThunk } from "..";
 import { FIREBASE_COLLECTIONS, generateFirebaseId } from "../../api/utils";
@@ -60,6 +61,7 @@ export const TakeUserToAppThunk = (
 
       dispatch(getAllPostsThunk());
       dispatch(getAllUsersThunk());
+      dispatch(getFriendshipsForUserThunk(user.id));
 
       onSuccess();
     } catch (error) {

@@ -12,6 +12,11 @@ export const getFriendshipsForUserThunk = (id: string): AppThunk<void> => {
   return async (dispatch) => {
     try {
       const friendships = await getFriendshipsForUser(id);
+      console.log(
+        "🚀 ~ file: friendships-thunk.ts:15 ~ return ~ friendships:",
+        friendships
+      );
+
       dispatch(FriendshipsActions.addFriendships(friendships));
     } catch (error) {
       console.log("Could not retrieve Friendships for user", id, error);

@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View } from "react-native";
 
 import { User } from "../../model/user";
+import { useAppSelector } from "../../store";
 import ManageFriendshipButton from "../ManageFriendshipButton";
 
 type Props = {
@@ -10,6 +11,8 @@ type Props = {
 
 const UserInfo = (props: Props) => {
   const { user } = props;
+
+  const loggedInUser = useAppSelector((state) => state.user);
 
   return (
     <View style={styles.topInfo}>
@@ -27,7 +30,9 @@ const UserInfo = (props: Props) => {
 
       {/* Manage Friendship */}
       <View style={styles.friendshipButton}>
-        <ManageFriendshipButton otherUser={user} />
+        {loggedInUser.id !== user.id && (
+          <ManageFriendshipButton otherUser={user} />
+        )}
       </View>
     </View>
   );
