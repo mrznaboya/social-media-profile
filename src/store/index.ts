@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import currentPost from "./features/currentPost";
 import currentUser from "./features/currentUser";
+import friendships from "./features/friendships";
 import postBuilder from "./features/postBuilder";
 import posts from "./features/posts";
 import user from "./features/user";
@@ -34,6 +35,7 @@ const store = configureStore({
      * Controls the state of the PostBuilderModal - i,e., whether it is open or close.
      */
     postBuilder,
+    friendships,
   },
 });
 
