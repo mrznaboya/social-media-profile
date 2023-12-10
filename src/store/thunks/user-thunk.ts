@@ -40,14 +40,17 @@ export const createUserAccountThunk = (
   };
 };
 
-type LoginUserThunkProps = {
+type TakeUserToAppThunkProps = {
   email: string;
   onSuccess: () => void;
   onError: () => void;
 };
 
-export const LoginUserThunk = (props: LoginUserThunkProps): AppThunk<void> => {
+export const TakeUserToAppThunk = (
+  props: TakeUserToAppThunkProps
+): AppThunk<void> => {
   const { email, onSuccess, onError } = props;
+
   return async (dispatch) => {
     try {
       const user = await getUserDocumentWithEmail(email);
@@ -73,6 +76,29 @@ export const getAllUsersThunk = (): AppThunk<void> => {
       dispatch(UsersActions.addUsers(users));
     } catch (error) {
       console.log("Could not retrieve all users", error);
+    }
+  };
+};
+
+type SignInThunkProps = {
+  password: string;
+  onSuccess: () => void;
+  onError: () => void;
+};
+
+export const SignInThunk = (props: SignInThunkProps): AppThunk<void> => {
+  const { password, onSuccess, onError } = props;
+
+  return async (dispatch, state) => {
+    const { email } = state().user;
+    try {
+      await auth().signInWithEmailAndPassword(email, password);
+
+      dispatch(TakeUserToAppThunk({ email, onSuccess, onError }));
+      onSuccess();
+    } catch (error) {
+      console.log(error);
+      return onError();
     }
   };
 };

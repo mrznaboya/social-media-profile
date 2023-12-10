@@ -5,7 +5,7 @@ import { Text, View } from "react-native";
 
 import { ROUTES } from "../src/routes";
 import { useAppDispatch } from "../src/store";
-import { LoginUserThunk } from "../src/store/thunks/user-thunk";
+import { TakeUserToAppThunk } from "../src/store/thunks/user-thunk";
 
 const Root = () => {
   const dispatch = useAppDispatch();
@@ -20,7 +20,7 @@ const Root = () => {
       );
 
       dispatch(
-        LoginUserThunk({
+        TakeUserToAppThunk({
           email: auth().currentUser?.email || "",
           onSuccess: goToApp,
           onError: goToSignUp,

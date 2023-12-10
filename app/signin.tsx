@@ -19,7 +19,7 @@ import Spacing from "../src/components/Spacing";
 import { ROUTES } from "../src/routes";
 import { useAppDispatch, useAppSelector } from "../src/store";
 import { UserActions } from "../src/store/features/user";
-import { createUserAccountThunk } from "../src/store/thunks/user-thunk";
+import { SignInThunk } from "../src/store/thunks/user-thunk";
 
 const Signup = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +32,7 @@ const Signup = () => {
     const onError = () =>
       Alert.alert("Could not create account", "Please try again");
 
-    dispatch(createUserAccountThunk({ password, onSuccess, onError }));
+    dispatch(SignInThunk({ password, onSuccess, onError }));
   };
 
   return (
@@ -43,29 +43,7 @@ const Signup = () => {
         <Text style={styles.heading}>Welcome to Social Media App</Text>
       </View>
 
-      <View style={styles.elementContainer}>
-        <InputLabel text="Name" />
-        <AppInput
-          value={user.name}
-          onChangeText={(text) => dispatch(UserActions.setName(text))}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-      </View>
-
-      <Spacing vertical={10} />
-
-      <View style={styles.elementContainer}>
-        <InputLabel text="Username" />
-        <AppInput
-          value={user.username}
-          onChangeText={(text) => dispatch(UserActions.setUsername(text))}
-          autoCapitalize="none"
-          autoCorrect={false}
-        />
-      </View>
-
-      <Spacing vertical={10} />
+      <Spacing vertical={5} />
 
       <View style={styles.elementContainer}>
         <InputLabel text="Email" />
@@ -94,7 +72,7 @@ const Signup = () => {
 
       <View style={styles.elementContainer}>
         <ContinueButton
-          child={<ButtonText text="Create Account" />}
+          child={<ButtonText text="Sign In" />}
           onPress={createAccount}
         />
       </View>
@@ -103,9 +81,9 @@ const Signup = () => {
 
       <TouchableOpacity
         style={styles.elementContainer}
-        onPress={() => router.push(ROUTES.SIGN_IN)}
+        onPress={() => router.push(ROUTES.SIGN_UP)}
       >
-        <Text style={styles.goToSignInText}>Already have an account?</Text>
+        <Text style={styles.goToSignInText}>Don't have an account?</Text>
       </TouchableOpacity>
     </SafeAreaView>
   );
