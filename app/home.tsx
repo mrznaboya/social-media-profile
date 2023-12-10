@@ -1,32 +1,34 @@
 import React, { useMemo } from "react";
-import { ScrollView, StyleSheet, Platform } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Platform,
+  TouchableOpacity,
+} from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
 import ButtonText from "../src/components/ButtonText";
-import ContinueButton from "../src/components/ContinueButton";
 import Header from "../src/components/Header";
 import PostCard from "../src/components/PostCard";
 import Spacing from "../src/components/Spacing";
 import { useAppDispatch, useAppSelector } from "../src/store";
-import { createPostThunk } from "../src/store/thunks/currentPost-thunk";
+import { CurrentPostActions } from "../src/store/features/currentPost";
+import { PostBuilderActions } from "../src/store/features/postBuilder";
+import { PRIMARY } from "../src/utils/colors";
 
 const Home = () => {
   const dispatch = useAppDispatch();
   const posts = useAppSelector((state) => state.posts);
-  // console.log("🚀 ~ file: home.tsx:12 ~ Home ~ posts:", Object.keys(posts));
+  // console.log("🚀 ~ file: home.tsx:21 ~ Home ~ posts:", posts);
 
-  /**
-   * START HERE:
-   * 1. Post does not show automatically - need to refresh
-   * 2. Post does not show User
-   * 3. Retrieve posts on auto-login
-   */
   const postsToShow = useMemo(() => {
+    console.log("🚀 ~ file: home.tsx:32 ~ postsToShow ~ posts:", posts);
     return Object.values(posts).sort((a, b) => b.createdDate - a.createdDate);
-  }, []);
+  }, [posts]);
 
   const createPost = () => {
-    dispatch(createPostThunk());
+    dispatch(CurrentPostActions.reset());
+    dispatch(PostBuilderActions.setIsPostModalOpen(true));
   };
 
   return (
@@ -42,10 +44,9 @@ const Home = () => {
         <Spacing vertical={50} />
       </ScrollView>
 
-      <ContinueButton
-        child={<ButtonText text="Create Post" />}
-        onPress={createPost}
-      />
+      <TouchableOpacity style={styles.createPostButton} onPress={createPost}>
+        <ButtonText text="+" />
+      </TouchableOpacity>
     </SafeAreaView>
   );
 };
@@ -54,12 +55,23 @@ export default Home;
 
 const styles = StyleSheet.create({
   container: {
-    // flex: 1,
+    flex: 1,
     // backgroundColor: "pink",
     paddingTop: Platform.OS === "android" ? 20 : 0, // SafeAreaView fix for Android
   },
   scrollView: {
     alignItems: "center",
     // flex: 1,
+  },
+  createPostButton: {
+    position: "absolute",
+    bottom: 30,
+    right: 30,
+    width: 60,
+    height: 60,
+    borderRadius: 30,
+    backgroundColor: PRIMARY,
+    justifyContent: "center",
+    alignItems: "center",
   },
 });

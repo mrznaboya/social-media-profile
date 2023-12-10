@@ -3,6 +3,7 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from "react-redux";
 
 import currentPost from "./features/currentPost";
 import currentUser from "./features/currentUser";
+import postBuilder from "./features/postBuilder";
 import posts from "./features/posts";
 import user from "./features/user";
 import users from "./features/users";
@@ -29,6 +30,10 @@ const store = configureStore({
      * As the currently logged in User comes across other Users, we will store their documents inside of this 'users' slice of state
      */
     users,
+    /**
+     * Controls the state of the PostBuilderModal - i,e., whether it is open or close.
+     */
+    postBuilder,
   },
 });
 

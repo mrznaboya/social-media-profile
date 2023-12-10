@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { PayloadAction, createSlice } from "@reduxjs/toolkit";
 
 import { Post } from "../../model/post";
 
@@ -18,6 +18,10 @@ export const currentPost = createSlice({
     setCurrentPost: (state, action) => {
       return action.payload;
     },
+    setDescription: (state, action: PayloadAction<string>) => {
+      state.text = action.payload;
+    },
+    reset: () => initialState,
   },
 });
 

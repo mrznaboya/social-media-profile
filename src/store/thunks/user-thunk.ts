@@ -8,6 +8,7 @@ import {
 } from "../../services/user";
 import { UserActions } from "../features/user";
 import { UsersActions } from "../features/users";
+import { getPostsForUserThunk } from "./posts-thunk";
 
 type CreateUserAccountThunkProps = {
   password: string;
@@ -20,7 +21,7 @@ export const createUserAccountThunk = (
 ): AppThunk<void> => {
   const { password, onSuccess, onError } = props;
 
-  return async (dispatch, state) => {
+  return async (_, state) => {
     try {
       const newUser = Object.assign({}, state().user);
       newUser.id = generateFirebaseId(FIREBASE_COLLECTIONS.USER);
@@ -53,6 +54,8 @@ export const LoginUserThunk = (props: LoginUserThunkProps): AppThunk<void> => {
 
       dispatch(UserActions.setUser(user));
       dispatch(UsersActions.addUsers([user]));
+
+      dispatch(getPostsForUserThunk(user.id));
 
       onSuccess();
     } catch (error) {

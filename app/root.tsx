@@ -14,6 +14,11 @@ const Root = () => {
 
   useEffect(() => {
     if (auth().currentUser?.email) {
+      console.log(
+        "🚀 ~ file: root.tsx:17 ~ useEffect ~ (auth().currentUser?.email):",
+        auth().currentUser?.email
+      );
+
       dispatch(
         LoginUserThunk({
           email: auth().currentUser?.email || "",
@@ -21,6 +26,8 @@ const Root = () => {
           onError: goToSignUp,
         })
       );
+    } else {
+      goToSignUp();
     }
   }, []);
   return (
