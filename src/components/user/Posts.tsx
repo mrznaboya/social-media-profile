@@ -1,5 +1,5 @@
 import React, { useMemo } from "react";
-import { ScrollView, StyleSheet, Text } from "react-native";
+import { ScrollView, StyleSheet } from "react-native";
 
 import { useAppSelector } from "../../store";
 import PostCard from "../PostCard";
@@ -27,14 +27,15 @@ const Posts = (props: Props) => {
 
   return (
     <ScrollView
-      contentContainerStyle={styles.scrollView}
+      style={styles.scrollView}
+      contentContainerStyle={styles.scrollViewContentContainer}
       showsVerticalScrollIndicator={false}
     >
-      <Text>Posts</Text>
+      {/* <Text>Posts</Text> */}
       {postsForUser.map((post) => (
         <PostCard post={post} key={post.id} />
       ))}
-      <Spacing vertical={50} />
+      <Spacing vertical={100} />
     </ScrollView>
   );
 };
@@ -42,7 +43,8 @@ const Posts = (props: Props) => {
 export default Posts;
 
 const styles = StyleSheet.create({
-  scrollView: {
+  scrollView: {},
+  scrollViewContentContainer: {
     alignItems: "center",
     // flex: 1,
   },
