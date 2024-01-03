@@ -4,6 +4,7 @@ import { ScrollView, StyleSheet, Text, View } from "react-native";
 import { Friendship } from "../../model/friendship";
 import { useAppSelector } from "../../store";
 import Spacing from "../Spacing";
+import { CARD_SHADOW } from "../../utils/styles";
 
 type Props = {
   isActive: boolean;
@@ -62,7 +63,7 @@ const FriendshipRow = (props: FriendshipRowProps) => {
   }, []);
 
   return (
-    <View>
+    <View style={styles.card}>
       <Text>{otherUser.name}</Text>
     </View>
   );
@@ -75,5 +76,14 @@ const styles = StyleSheet.create({
   scrollViewContentContainer: {
     alignItems: "center",
     // flex: 1,
+  },
+  card: {
+    height: 60,
+    width: "90%",
+    marginTop: 10,
+    borderRadius: 10,
+    flexDirection: "row",
+    backgroundColor: "white",
+    ...CARD_SHADOW,
   },
 });
