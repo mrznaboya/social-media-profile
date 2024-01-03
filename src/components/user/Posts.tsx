@@ -43,7 +43,9 @@ const Posts = (props: Props) => {
 export default Posts;
 
 const styles = StyleSheet.create({
-  scrollView: {},
+  scrollView: {
+    paddingTop: 10,
+  },
   scrollViewContentContainer: {
     alignItems: "center",
     // flex: 1,

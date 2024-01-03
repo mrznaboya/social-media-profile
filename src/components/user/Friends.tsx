@@ -1,6 +1,7 @@
 import React, { useMemo } from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
 
+import { Friendship } from "../../model/friendship";
 import { useAppSelector } from "../../store";
 import Spacing from "../Spacing";
 
@@ -30,26 +31,48 @@ const Friends = (props: Props) => {
 
   return (
     <ScrollView
-      contentContainerStyle={styles.scrollView}
+      style={styles.scrollView}
+      contentContainerStyle={styles.scrollViewContentContainer}
       showsVerticalScrollIndicator={false}
     >
-      <Text>Friends</Text>
       {friendshipsForUser.map((friendship) => {
-        return (
-          <View>
-            <Text>{friendship.id}</Text>
-          </View>
-        );
+        return <FriendshipRow friendship={friendship} key={friendship.id} />;
       })}
-      <Spacing vertical={50} />
+
+      <Spacing vertical={100} />
     </ScrollView>
+  );
+};
+
+type FriendshipRowProps = {
+  friendship: Friendship;
+};
+
+const FriendshipRow = (props: FriendshipRowProps) => {
+  const { friendship } = props;
+  const users = useAppSelector((state) => state.users);
+  const currentUser = useAppSelector((state) => state.currentUser);
+
+  const otherUserId = useMemo(() => {
+    return friendship.users.find((a) => a !== currentUser.id)!;
+  }, []);
+
+  const otherUser = useMemo(() => {
+    return users[otherUserId];
+  }, []);
+
+  return (
+    <View>
+      <Text>{otherUser.name}</Text>
+    </View>
   );
 };
 
 export default Friends;
 
 const styles = StyleSheet.create({
-  scrollView: {
+  scrollView: {},
+  scrollViewContentContainer: {
     alignItems: "center",
     // flex: 1,
   },

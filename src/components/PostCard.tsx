@@ -6,6 +6,7 @@ import { Post } from "../model/post";
 import { ROUTES } from "../routes";
 import { useAppDispatch, useAppSelector } from "../store";
 import { CurrentPostActions } from "../store/features/currentPost";
+import { CARD_SHADOW } from "../utils/styles";
 
 type Props = {
   post: Post;
@@ -50,13 +51,7 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderRadius: 10,
     flexDirection: "row",
-    shadowOffset: {
-      width: 1,
-      height: 1,
-    },
-    shadowOpacity: 0.2,
-    shadowRadius: 5,
-    elevation: 5, // For Android
+    ...CARD_SHADOW,
   },
   photo: {
     height: 40,
