@@ -8,7 +8,7 @@ import {
   View,
 } from "react-native";
 
-import { Friendship } from "../../model/friendship";
+import { FRIENDSHIP_STATUS, Friendship } from "../../model/friendship";
 import { useAppSelector } from "../../store";
 import { CARD_SHADOW } from "../../utils/styles";
 import Spacing from "../Spacing";
@@ -61,6 +61,11 @@ const FriendshipRow = (props: FriendshipRowProps) => {
   const users = useAppSelector((state) => state.users);
   const currentUser = useAppSelector((state) => state.user);
 
+  const isRequester = useMemo(
+    () => friendship.requester === currentUser.id,
+    [friendship.requester, currentUser.id]
+  );
+
   const otherUserId = useMemo(() => {
     return friendship.users.find((a) => a !== currentUser.id)!;
   }, []);
@@ -85,30 +90,32 @@ const FriendshipRow = (props: FriendshipRowProps) => {
         <Text>{otherUser?.bio}</Text>
       </View>
 
-      <View style={styles.actionContainer}>
-        <TouchableOpacity
-          style={[styles.iconContainer, styles.checkIconContainer]}
-          onPress={onAccept}
-        >
-          <Ionicons
-            name="checkmark"
-            size={24}
-            color="black"
-            style={styles.checkIcon}
-          />
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={[styles.iconContainer, styles.closeIconContainer]}
-          onPress={onReject}
-        >
-          <Ionicons
-            name="close-outline"
-            size={24}
-            color="black"
-            style={styles.closeIcon}
-          />
-        </TouchableOpacity>
-      </View>
+      {!isRequester && friendship.status === FRIENDSHIP_STATUS.PENDING && (
+        <View style={styles.actionContainer}>
+          <TouchableOpacity
+            style={[styles.iconContainer, styles.checkIconContainer]}
+            onPress={onAccept}
+          >
+            <Ionicons
+              name="checkmark"
+              size={24}
+              color="black"
+              style={styles.checkIcon}
+            />
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={[styles.iconContainer, styles.closeIconContainer]}
+            onPress={onReject}
+          >
+            <Ionicons
+              name="close-outline"
+              size={24}
+              color="black"
+              style={styles.closeIcon}
+            />
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };
@@ -152,30 +159,23 @@ const styles = StyleSheet.create({
   actionContainer: {
     flexDirection: "row",
     justifyContent: "space-around",
-    width: "20%",
+    width: "22%",
     // backgroundColor: "orange",
     alignItems: "center",
   },
   iconContainer: {
-    height: 40,
-    width: 40,
+    height: 30,
+    width: 30,
     justifyContent: "center",
     alignItems: "center",
+    borderRadius: 15,
   },
   checkIconContainer: {
-    height: 30,
-    width: 30,
-  },
-  closeIconContainer: {
-    height: 30,
-    width: 30,
-  },
-  checkIcon: {
-    borderRadius: 15,
     backgroundColor: "green",
   },
-  closeIcon: {
-    borderRadius: 15,
+  closeIconContainer: {
     backgroundColor: "red",
   },
+  checkIcon: {},
+  closeIcon: {},
 });
