@@ -1,4 +1,4 @@
-import { createDocumentWithId } from "../api/DocumentMutator";
+import { createDocumentWithId, updateDocument } from "../api/DocumentMutator";
 import {
   WhereCriteria,
   getDocumentsWithCriteria,
@@ -16,6 +16,14 @@ export const createFriendshipDocument = async (friendship: Friendship) => {
   if (resp.error) {
     throw resp.error;
   }
+};
+
+export const updateFriendshipDocument = async (friendship: Friendship) => {
+  await updateDocument(
+    FIREBASE_COLLECTIONS.FRIENDSHIP,
+    friendship.id,
+    friendship
+  );
 };
 
 /**

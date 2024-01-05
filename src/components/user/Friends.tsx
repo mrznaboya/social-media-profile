@@ -9,7 +9,8 @@ import {
 } from "react-native";
 
 import { FRIENDSHIP_STATUS, Friendship } from "../../model/friendship";
-import { useAppSelector } from "../../store";
+import { useAppDispatch, useAppSelector } from "../../store";
+import { acceptFriendshipThunk } from "../../store/thunks/friendships-thunk";
 import { CARD_SHADOW } from "../../utils/styles";
 import Spacing from "../Spacing";
 
@@ -58,6 +59,8 @@ type FriendshipRowProps = {
 
 const FriendshipRow = (props: FriendshipRowProps) => {
   const { friendship } = props;
+  const dispatch = useAppDispatch();
+
   const users = useAppSelector((state) => state.users);
   const currentUser = useAppSelector((state) => state.user);
 
@@ -74,7 +77,12 @@ const FriendshipRow = (props: FriendshipRowProps) => {
     return users[otherUserId];
   }, []);
 
-  const onAccept = () => {};
+  const onAccept = () => {
+    const onSuccess = () => {};
+    const onError = () => {};
+
+    dispatch(acceptFriendshipThunk(friendship, onSuccess, onError));
+  };
   const onReject = () => {};
 
   return (
@@ -114,6 +122,12 @@ const FriendshipRow = (props: FriendshipRowProps) => {
               style={styles.closeIcon}
             />
           </TouchableOpacity>
+        </View>
+      )}
+
+      {isRequester && friendship.status === FRIENDSHIP_STATUS.PENDING && (
+        <View style={styles.actionContainer}>
+          <Text style={styles.pendingMessage}>Pending...</Text>
         </View>
       )}
     </View>
@@ -162,6 +176,9 @@ const styles = StyleSheet.create({
     width: "22%",
     // backgroundColor: "orange",
     alignItems: "center",
+  },
+  pendingMessage: {
+    fontStyle: "italic",
   },
   iconContainer: {
     height: 30,
