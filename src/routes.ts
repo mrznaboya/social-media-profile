@@ -6,4 +6,5 @@ export enum ROUTES {
   SIGN_UP = "signup/",
   SIGN_IN = "signin/",
   MY_PROFILE = "myProfile/",
+  MESSAGES = "messages/",
 }

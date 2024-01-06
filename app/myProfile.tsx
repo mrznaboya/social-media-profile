@@ -1,3 +1,4 @@
+import { Ionicons } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
@@ -15,6 +16,7 @@ import Posts from "../src/components/user/Posts";
 import UserInfo from "../src/components/user/UserInfo";
 import { useAppSelector } from "../src/store";
 import { BORDER_LIGHT_GREY } from "../src/utils/colors";
+import { ROUTES } from "../src/routes";
 
 type TABS = "Posts" | "Friends";
 
@@ -31,7 +33,14 @@ const MyProfile = () => {
 
   return (
     <SafeAreaView style={styles.container} edges={["top"]}>
-      <Header leftButton={{ onPress: goBack }} showLogo />
+      <Header
+        leftButton={{ onPress: goBack }}
+        showLogo
+        rightButton={{
+          child: <Ionicons name="chatbubble" size={24} color="black" />,
+          onPress: () => router.push(ROUTES.MESSAGES),
+        }}
+      />
       <View style={styles.main}>
         {/* User Info */}
         <UserInfo user={user} />
