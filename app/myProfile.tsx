@@ -14,9 +14,9 @@ import Header from "../src/components/Header";
 import Friends from "../src/components/user/Friends";
 import Posts from "../src/components/user/Posts";
 import UserInfo from "../src/components/user/UserInfo";
+import { ROUTES } from "../src/routes";
 import { useAppSelector } from "../src/store";
 import { BORDER_LIGHT_GREY } from "../src/utils/colors";
-import { ROUTES } from "../src/routes";
 
 type TABS = "Posts" | "Friends";
 
