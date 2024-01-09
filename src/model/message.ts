@@ -2,7 +2,7 @@ export type Message = {
   id: string;
   thread: string;
   sender: string;
-  test: string;
+  text: string;
 
   /**
    * Metadata
