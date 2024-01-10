@@ -29,15 +29,6 @@ const MessageList = () => {
       {allMessageThreads.map((messageThread) => (
         <MessageRow key={messageThread.id} message={messageThread} />
       ))}
-
-      <View>
-        <TouchableOpacity
-          style={styles.createThreadButton}
-          onPress={createMessageThread}
-        >
-          <ButtonText text="+" />
-        </TouchableOpacity>
-      </View>
     </View>
   );
 };
@@ -73,16 +64,5 @@ const styles = StyleSheet.create({
     flex: 1,
     // backgroundColor: "pink",
     paddingTop: Platform.OS === "android" ? 20 : 0, // SafeAreaView fix for Android
-  },
-  createThreadButton: {
-    position: "absolute",
-    bottom: 30,
-    right: 30,
-    width: 60,
-    height: 60,
-    borderRadius: 30,
-    backgroundColor: PRIMARY,
-    justifyContent: "center",
-    alignItems: "center",
   },
 });
