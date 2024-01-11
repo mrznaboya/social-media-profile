@@ -1,16 +1,8 @@
 import React, { useMemo } from "react";
-import {
-  Platform,
-  StyleSheet,
-  Text,
-  TouchableOpacity,
-  View,
-} from "react-native";
+import { Platform, StyleSheet, Text, View } from "react-native";
 
-import ButtonText from "../src/components/ButtonText";
 import { MessageThread } from "../src/model/messageThread";
 import { useAppDispatch, useAppSelector } from "../src/store";
-import { PRIMARY } from "../src/utils/colors";
 
 const MessageList = () => {
   const dispatch = useAppDispatch();
