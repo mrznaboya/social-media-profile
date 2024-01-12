@@ -9,6 +9,7 @@ import { TakeUserToAppThunk } from "../src/store/thunks/user-thunk";
 
 const Root = () => {
   const dispatch = useAppDispatch();
+
   const goToSignUp = () => router.push(ROUTES.SIGN_UP);
   const goToApp = () => router.push(ROUTES.HOME);
 

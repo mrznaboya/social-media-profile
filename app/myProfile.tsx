@@ -47,6 +47,7 @@ const MyProfile = () => {
 
         {/* Tabs */}
         <Tabs onTabPress={onTabPress} />
+
         <Posts isActive={activeTab === "Posts"} />
         <Friends isActive={activeTab === "Friends"} />
       </View>
