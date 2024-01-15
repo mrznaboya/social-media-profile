@@ -38,7 +38,9 @@ const Home = () => {
   const signOut = () => {
     auth().signOut();
 
-    router.replace(ROUTES.SIGN_UP);
+    setTimeout(() => {
+      router.replace(ROUTES.SIGN_UP);
+    }, 1000);
   };
 
   const goToProfile = () => router.push(ROUTES.MY_PROFILE);

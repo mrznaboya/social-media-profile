@@ -17,6 +17,9 @@ export const posts = createSlice({
         state[post.id] = post;
       });
     },
+    resetPosts: () => {
+      return initialState;
+    },
   },
 });
 

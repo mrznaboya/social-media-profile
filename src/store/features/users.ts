@@ -17,6 +17,9 @@ export const users = createSlice({
         state[user.id] = user;
       });
     },
+    resetUsers: () => {
+      return initialState;
+    },
   },
 });
 

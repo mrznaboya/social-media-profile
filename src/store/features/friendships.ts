@@ -17,6 +17,9 @@ export const friendships = createSlice({
         state[friendship.id] = friendship;
       });
     },
+    resetFriendships: () => {
+      return initialState;
+    },
   },
 });
 

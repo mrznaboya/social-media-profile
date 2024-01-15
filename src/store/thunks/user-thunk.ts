@@ -9,6 +9,9 @@ import {
   getAllUsers,
   getUserDocumentWithEmail,
 } from "../../services/user";
+import { FriendshipsActions } from "../features/friendships";
+import { messageThreadsActions } from "../features/messageThreads";
+import { PostsActions } from "../features/posts";
 import { UserActions } from "../features/user";
 import { UsersActions } from "../features/users";
 
@@ -88,7 +91,7 @@ type SignInThunkProps = {
   onError: () => void;
 };
 
-export const SignInThunk = (props: SignInThunkProps): AppThunk<void> => {
+export const signInThunk = (props: SignInThunkProps): AppThunk<void> => {
   const { password, onSuccess, onError } = props;
 
   return async (dispatch, state) => {
@@ -101,6 +104,20 @@ export const SignInThunk = (props: SignInThunkProps): AppThunk<void> => {
     } catch (error) {
       console.log(error);
       return onError();
+    }
+  };
+};
+
+export const signOutUsereThunk = (): AppThunk<void> => {
+  return async (dispatch) => {
+    try {
+      dispatch(UserActions.resetUser());
+      dispatch(UsersActions.resetUsers());
+      dispatch(PostsActions.resetPosts());
+      dispatch(messageThreadsActions.resetMessageThreads());
+      dispatch(FriendshipsActions.resetFriendships());
+    } catch (error) {
+      console.log("Could not sign out user", error);
     }
   };
 };

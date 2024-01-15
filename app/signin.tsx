@@ -19,7 +19,7 @@ import Spacing from "../src/components/Spacing";
 import { ROUTES } from "../src/routes";
 import { useAppDispatch, useAppSelector } from "../src/store";
 import { UserActions } from "../src/store/features/user";
-import { SignInThunk } from "../src/store/thunks/user-thunk";
+import { signInThunk } from "../src/store/thunks/user-thunk";
 
 const Signup = () => {
   const dispatch = useAppDispatch();
@@ -32,7 +32,7 @@ const Signup = () => {
     const onError = () =>
       Alert.alert("Could not create account", "Please try again");
 
-    dispatch(SignInThunk({ password, onSuccess, onError }));
+    dispatch(signInThunk({ password, onSuccess, onError }));
   };
 
   return (
